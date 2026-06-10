@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Management System - DBS25F006</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- REQUIREMENT: File menu on each screen -->
+    <!-- REQUIREMENT: File menu on each screen -->
+    <nav class="file-menu">
+        <ul>
+            <li><a href="#">File</a>
+                <ul class="dropdown">
+                    <li><a href="#" onclick="showPanel('tablePanel')">Dashboard</a></li>
+                    <li><a href="#" onclick="showPanel('login')">Login</a></li>
+                    <li><a href="#" onclick="logout()">Logout</a></li> <!-- Logout now works -->
+                </ul>
+            </li>
+            <li><a href="#" onclick="showPanel('patientForm')">Patients</a></li>
+            <li><a href="#" onclick="showPanel('doctors')">Doctors</a></li> <!-- Doctors now works -->
+            <li><a href="#" onclick="showPanel('reports')">Reports</a></li> <!-- Reports now works -->
+        </ul>
+    </nav>
+
+    <div class="main-container">
+        
+        <!-- PANEL 1: Login Panel -->
+        <div id="loginPanel" class="panel form-panel" style="display:none;">
+            <h2>Admin Login</h2>
+            <div class="form-group">
+                <label>Username:</label>
+                <input type="text" class="text-box" placeholder="Enter username">
+            </div>
+            <div class="form-group">
+                <label>Password:</label>
+                <input type="password" class="password-field" placeholder="Enter password">
+            </div>
+            <button class="btn" onclick="showPanel('tablePanel')">Login</button>
+        </div>
+
+        <!-- PANEL 2: Patient Form Panel -->
+        <div id="patientFormPanel" class="panel form-panel" style="display:none;">
+            <h2 id="formTitle">Add New Patient</h2>
+            <form id="patientForm" onsubmit="handleFormSubmit(event)">
+                <input type="hidden" id="patientId">
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>First Name:</label>
+                        <input type="text" id="firstName" class="text-box" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Last Name:</label>
+                        <input type="text" id="lastName" class="text-box" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Date of Birth:</label>
+                        <input type="date" id="dob" class="date-selector" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Gender:</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="gender" value="M" required> Male</label>
+                            <label><input type="radio" name="gender" value="F"> Female</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Blood Type:</label>
+                        <select id="bloodType" class="form-select" required>
+                            <option value="">-- Select Blood Type --</option>
+                            <option value="A+">A+</option>
+                            <option value="A-">A-</option>
+                            <option value="B+">B+</option>
+                            <option value="B-">B-</option>
+                            <option value="O+">O+</option>
+                            <option value="O-">O-</option>
+                            <option value="AB+">AB+</option>
+                            <option value="AB-">AB-</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone:</label>
+                        <input type="text" id="phone" class="text-box" pattern="[0-9]{10}" title="10 digit number" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Address:</label>
+                    <textarea id="address" class="text-area" rows="3"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label><input type="checkbox" id="insurance"> Subscribe to SMS Alerts</label>
+                </div>
+
+                <div class="button-group">
+                    <button type="submit" class="btn" id="submitBtn">Save Patient</button>
+                    <button type="button" class="btn btn-cancel" onclick="showPanel('tablePanel')">Cancel</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- PANEL 3: Patient Data Table Panel -->
+        <div id="tablePanel" class="panel table-panel">
+            <h2>Patient Records</h2>
+            <button class="btn" onclick="openAddForm()">+ Add New Patient</button>
+            
+            <div class="table-scroll-container"> 
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Phone</th>
+                            <th>Gender</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="patientTableBody">
+                        <!-- Data injected by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- PANEL 4: Doctors Panel (ADDED) -->
+        <div id="doctorsPanel" class="panel table-panel" style="display:none;">
+            <h2>Doctors Directory</h2>
+            <button class="btn" onclick="openAddDoctorForm()">+ Add New Doctor</button>
+            
+            <div class="table-scroll-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Doctor Name</th>
+                            <th>Specialization</th>
+                            <th>Phone</th>
+                        </tr>
+                    </thead>
+                    <tbody id="doctorsTableBody">
+                        <!-- Doctors data injected by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- PANEL: Doctor Form Panel -->
+        <div id="doctorFormPanel" class="panel form-panel" style="display:none;">
+            <h2 id="docFormTitle">Add New Doctor</h2>
+            <form id="doctorForm" onsubmit="handleDoctorFormSubmit(event)">
+                <input type="hidden" id="doctorId">
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>First Name:</label>
+                        <input type="text" id="docFirstName" class="text-box" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Last Name:</label>
+                        <input type="text" id="docLastName" class="text-box" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Specialization:</label>
+                        <select id="docSpecialization" class="form-select" required>
+                            <option value="">-- Select Specialization --</option>
+                            <option value="Cardiology">Cardiology</option>
+                            <option value="Pediatrics">Pediatrics</option>
+                            <option value="Neurology">Neurology</option>
+                            <option value="Orthopedics">Orthopedics</option>
+                            <option value="General">General</option>
+                            <option value="Dermatology">Dermatology</option>
+                            <option value="Oncology">Oncology</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone:</label>
+                        <input type="text" id="docPhone" class="text-box" pattern="[0-9]{10}" title="10 digit number" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Department:</label>
+                    <select id="docDept" class="form-select">
+                        <option value="1">Cardiology Dept</option>
+                        <option value="2">Pediatrics Dept</option>
+                        <option value="3">General Ward</option>
+                        <option value="4">Emergency</option>
+                    </select>
+                </div>
+
+                <div class="button-group">
+                    <button type="submit" class="btn" id="docSubmitBtn">Save Doctor</button>
+                    <button type="button" class="btn btn-cancel" onclick="showPanel('doctors')">Cancel</button>
+                </div>
+            </form>
+        </div>
+        <!-- PANEL 5: Reports Panel (ADDED) -->
+        <div id="reportsPanel" class="panel form-panel" style="display:none;">
+            <h2>Generate Reports</h2>
+            <p style="margin-bottom: 20px; color: #666;">Select a report type to generate:</p>
+            
+            <div class="form-group">
+                <button class="btn" onclick="generateReport('patients')" style="margin: 10px; width: 200px;">
+                    📄 Patient List Report
+                </button>
+                <button class="btn" onclick="generateReport('doctors')" style="margin: 10px; width: 200px;">
+                    👨‍⚕️ Doctors List Report
+                </button>
+                <button class="btn" onclick="generateReport('appointments')" style="margin: 10px; width: 200px;">
+                    📅 Appointments Report
+                </button>
+            </div>
+            
+            <div style="margin-top: 30px; padding: 20px; background: #f8f9fa; border-radius: 5px;">
+                <h3>PDF Reports (Backend)</h3>
+                <p style="margin: 10px 0;">
+                    <strong>Note:</strong> PDF reports will be generated using Java backend with iText library.
+                </p>
+                <button class="btn" onclick="alert('PDF Report Generation requires Java Servlet backend')" style="margin: 10px;">
+                    Generate PDF Report
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
