@@ -1,0 +1,22 @@
+HOSPITAL MANAGEMENT SYSTEM
+DOCTORS LIST REPORT
+Generated: 6/19/2026, 9:34:29 PM
+==========================================
+
+Total Doctors: 3
+
+ID: 1
+Name: Dr. Ahmed Khan
+Specialization: Cardiology
+Phone: 1112223333
+------------------------------------------
+ID: 2
+Name: Dr. Mudasir Ali
+Specialization: Pediatrics
+Phone: 4445556666
+------------------------------------------
+ID: 3
+Name: Dr. Baber Ali
+Specialization: Neurology
+Phone: 9989879869
+------------------------------------------

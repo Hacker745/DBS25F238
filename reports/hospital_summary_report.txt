@@ -1,0 +1,13 @@
+HOSPITAL MANAGEMENT SYSTEM
+COMPREHENSIVE REPORT
+Generated: 6/19/2026, 9:34:37 PM
+==========================================
+
+SUMMARY:
+- Total Patients: 3
+- Total Doctors: 3
+- Total Appointments: 2
+- Total Medicines: 4
+- Total Wards: 3
+
+Note: This is a text version. PDF generation requires Java backend.

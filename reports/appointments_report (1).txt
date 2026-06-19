@@ -1,0 +1,21 @@
+HOSPITAL MANAGEMENT SYSTEM
+APPOINTMENTS REPORT
+Generated: 6/19/2026, 9:34:33 PM
+==========================================
+
+Total Appointments: 2
+
+Appointment ID: 1
+Patient: John Doe
+Doctor: Dr. Ahmed Khan
+Date: 2026-06-20
+Time: 10:00:00
+Status: Scheduled
+------------------------------------------
+Appointment ID: 2
+Patient: Zain Ali
+Doctor: Dr. Baber Ali
+Date: 2026-06-20
+Time: 09:30:00
+Status: Scheduled
+------------------------------------------

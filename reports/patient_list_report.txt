@@ -1,0 +1,31 @@
+HOSPITAL MANAGEMENT SYSTEM
+PATIENT LIST REPORT
+Generated: 6/19/2026, 9:34:22 PM
+==========================================
+
+Total Patients: 3
+
+ID: 1
+Name: Sara Asim
+DOB: 1990-05-15
+Gender: F
+Blood Type: O+
+Phone: 1234567890
+Address: 123 Main St
+------------------------------------------
+ID: 3
+Name: Ali Ahmed
+DOB: 2005-06-10
+Gender: M
+Blood Type: B+
+Phone: 0902020202
+Address: Multan
+------------------------------------------
+ID: 4
+Name: Zain Ali
+DOB: 2007-06-18
+Gender: M
+Blood Type: AB+
+Phone: 0789698768
+Address: 12 Liink Road
+------------------------------------------
